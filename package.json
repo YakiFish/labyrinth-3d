@@ -1,0 +1,15 @@
+{
+  "name": "labyrinth-3d",
+  "version": "1.0.0",
+  "description": "3D Labyrinth game with mobile controller via WebRTC/PeerJS",
+  "scripts": {
+    "start": "npx serve . -p 8080 --no-clipboard"
+  },
+  "dependencies": {
+    "three": "^0.160.0",
+    "peerjs": "^1.5.2"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

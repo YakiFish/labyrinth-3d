@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🏰 Labyrinth 3D - 迷宫冒险</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <!-- 启动画面 -->
+    <div id="landing" class="screen active">
+        <div class="container">
+            <div class="logo">
+                <h1>🏰 LABYRINTH 3D</h1>
+                <p class="subtitle">双屏联动迷宫冒险</p>
+            </div>
+            <div class="role-selection">
+                <button id="btn-display" class="role-btn display-btn">
+                    <div class="role-icon">🖥️</div>
+                    <div class="role-title">电脑显示端</div>
+                    <div class="role-desc">展示 3D 迷宫与游戏画面</div>
+                </button>
+                <button id="btn-controller" class="role-btn controller-btn">
+                    <div class="role-icon">📱</div>
+                    <div class="role-title">手机控制器</div>
+                    <div class="role-desc">陀螺仪 / 触控 D-Pad</div>
+                </button>
+            </div>
+            <div id="qr-hint" class="qr-hint hidden">
+                <p>📱 用手机扫描二维码，或复制链接在手机打开</p>
+                <div id="qr-display"></div>
+                <input type="text" id="qr-url" readonly />
+                <button id="copy-url">📋 复制链接</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 电脑显示端 -->
+    <div id="display" class="screen">
+        <div id="game-header">
+            <div class="game-title">🏰 LABYRINTH 3D</div>
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-label">等级</span>
+                    <span id="level" class="stat-value">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">得分</span>
+                    <span id="score" class="stat-value">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">时间</span>
+                    <span id="timer" class="stat-value">0:00</span>
+                </div>
+            </div>
+        </div>
+        <div id="game-canvas-container">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+        <div id="connection-status" class="status-bar">
+            <div class="status-dot"></div>
+            <span>等待控制器连接...</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="network.js"></script>
+    <script src="game.js"></script>
+    <script>
+        // Controller 路由: 如果 URL 带 role=controller，直接跳转到 controller.html
+        (function() {
+            const params = new URLSearchParams(location.search);
+            if (params.get('role') === 'controller') {
+                // 保持 host 参数，跳转到 controller.html
+                location.href = 'controller.html?host=' + params.get('host');
+            }
+        })();
+    </script>
+</body>
+</html>

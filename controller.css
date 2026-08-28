@@ -1,0 +1,316 @@
+/* Controller specific styles - 手机端 */
+.controller-container {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.controller-header {
+  padding: 15px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.controller-header h2 {
+  font-size: 1.2em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.conn-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.conn-status.ok {
+  background: rgba(0, 255, 136, 0.15);
+  color: #00ff88;
+}
+
+.conn-status.pending {
+  background: rgba(255, 170, 0, 0.15);
+  color: #ffaa00;
+}
+
+.conn-status.error {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff4444;
+}
+
+/* 连接表单 */
+.connect-form {
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+}
+
+.connect-form label {
+  font-size: 0.9em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+#host-id {
+  background: var(--primary);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  text-align: center;
+  letter-spacing: 0.15em;
+  outline: none;
+  font-family: monospace;
+}
+
+#host-id:focus {
+  box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
+}
+
+#btn-connect {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#btn-connect:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+/* 控制器 UI */
+.controller-ui {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.controller-ui.hidden {
+  display: none;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tab {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  color: var(--text);
+  padding: 10px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.mode-panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.mode-panel.active {
+  display: flex;
+}
+
+.hint {
+  font-size: 0.75em;
+  color: var(--muted);
+  text-align: center;
+  max-width: 280px;
+}
+
+/* D-Pad - 移动端优化 */
+.dpad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 6px;
+  width: 220px;
+  height: 220px;
+}
+
+.dpad.small {
+  width: 160px;
+  height: 160px;
+  gap: 4px;
+}
+
+.dpad-btn {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 1.8em;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dpad-btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(0.92);
+}
+
+.dpad-center {
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 1.2em;
+}
+
+.dpad .dpad-btn:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.dpad .dpad-btn:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.dpad .dpad-center {
+  grid-column: 2;
+  grid-row: 2;
+}
+.dpad .dpad-btn:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+.dpad .dpad-btn:nth-child(5) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* 陀螺仪 */
+.gyro-display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+}
+
+.gyro-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gyro-bar span {
+  font-size: 0.85em;
+  width: 20px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.gyro-fill {
+  height: 10px;
+  background: var(--accent);
+  border-radius: 5px;
+  transition: width 0.1s;
+  min-width: 4px;
+}
+
+.calibrate-btn {
+  background: var(--primary);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 0.95em;
+  cursor: pointer;
+  margin-top: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calibrate-btn:active {
+  opacity: 0.7;
+}
+
+/* 手动模式 */
+#mode-manual p {
+  font-size: 0.85em;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* 底部 */
+.controller-footer {
+  padding: 10px;
+  background: var(--surface);
+  border-radius: 10px;
+  margin-top: auto;
+}
+
+.latency-display {
+  font-size: 0.85em;
+  color: var(--muted);
+  text-align: center;
+}
+
+#joystick {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--primary);
+  touch-action: none;
+  -webkit-touch-callout: none;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.controller-ui {
+  animation: fadeIn 0.4s ease;
+}

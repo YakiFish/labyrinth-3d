@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎮 Labyrinth 3D - 控制器</title>
+    <link rel="stylesheet" href="controller.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div class="controller-container">
+        <div class="controller-header">
+            <h2>📱 控制器</h2>
+            <div id="conn-status" class="conn-status">⏳ 连接中...</div>
+        </div>
+
+        <div id="connect-form" class="connect-form">
+            <label for="host-id">主机 ID:</label>
+            <input type="text" id="host-id" placeholder="输入主机显示的6位代码" autocomplete="off" />
+            <button id="btn-connect">🔗 连接</button>
+        </div>
+
+        <div id="controller-ui" class="controller-ui hidden">
+            <div class="mode-tabs">
+                <button class="tab active" data-mode="touch">🕹️ 触控</button>
+                <button class="tab" data-mode="gyro">📐 陀螺仪</button>
+                <button class="tab" data-mode="manual">⌨️ 手动</button>
+            </div>
+
+            <!-- 触控模式 -->
+            <div id="mode-touch" class="mode-panel active">
+                <div class="dpad">
+                    <button class="dpad-btn" data-dir="up">▲</button>
+                    <button class="dpad-btn" data-dir="left">◀</button>
+                    <div class="dpad-center">●</div>
+                    <button class="dpad-btn" data-dir="right">▶</button>
+                    <button class="dpad-btn" data-dir="down">▼</button>
+                </div>
+                <p class="hint">使用方向键或在屏幕上滑动</p>
+                <canvas id="joystick" width="200" height="200"></canvas>
+            </div>
+
+            <!-- 陀螺仪模式 -->
+            <div id="mode-gyro" class="mode-panel">
+                <div class="gyro-display">
+                    <div class="gyro-bar">
+                        <div id="gyro-x" class="gyro-fill"></div>
+                        <span>X</span>
+                    </div>
+                    <div class="gyro-bar">
+                        <div id="gyro-y" class="gyro-fill"></div>
+                        <span>Y</span>
+                    </div>
+                    <div class="gyro-bar">
+                        <div id="gyro-z" class="gyro-fill"></div>
+                        <span>Z</span>
+                    </div>
+                </div>
+                <button id="btn-calibrate" class="calibrate-btn">🎯 校准</button>
+                <p class="hint">倾斜手机控制方向</p>
+            </div>
+
+            <!-- 手动模式 -->
+            <div id="mode-manual" class="mode-panel">
+                <p>点击按钮手动移动</p>
+                <div class="dpad small">
+                    <button class="dpad-btn" data-dir="up">▲</button>
+                    <button class="dpad-btn" data-dir="left">◀</button>
+                    <div class="dpad-center">●</div>
+                    <button class="dpad-btn" data-dir="right">▶</button>
+                    <button class="dpad-btn" data-dir="down">▼</button>
+                </div>
+            </div>
+
+            <div class="controller-footer">
+                <div class="latency-display">⏱️ 延迟: <span id="latency">--</span>ms</div>
+            </div>
+        </div>
+    </div>
+    <script src="network.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>

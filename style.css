@@ -1,0 +1,563 @@
+/* ============================================
+   Labyrinth 3D - 主样式
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --primary: #0f3460;
+  --accent: #00aaff;
+  --gold: #ffd700;
+  --text: #e0e0e0;
+  --muted: #888;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.screen {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+.screen.active {
+  display: flex;
+}
+
+/* ===== 启动画面 ===== */
+#landing {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+#landing::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 50px,
+    rgba(0, 170, 255, 0.03) 50px,
+    rgba(0, 170, 255, 0.03) 51px
+  );
+  animation: bgDrift 20s linear infinite;
+}
+
+@keyframes bgDrift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(50px, 50px); }
+}
+
+.container {
+  text-align: center;
+  z-index: 1;
+  padding: 20px;
+}
+
+.logo h1 {
+  font-size: 3.5em;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #00aaff, #ffd700, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.subtitle {
+  font-size: 1.2em;
+  color: var(--muted);
+  margin-bottom: 50px;
+}
+
+.role-selection {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.role-btn {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  padding: 40px 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.role-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 170, 255, 0.2);
+}
+
+.role-icon {
+  font-size: 4em;
+  margin-bottom: 15px;
+}
+
+.role-title {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.role-desc {
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+/* QR 提示 */
+.qr-hint {
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+}
+
+.qr-hint.hidden {
+  display: none;
+}
+
+#qr-display {
+  margin: 15px auto;
+  display: inline-block;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#qr-url {
+  background: var(--primary);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8em;
+  width: 100%;
+  max-width: 400px;
+  margin: 10px 0;
+}
+
+#copy-url {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: opacity 0.2s;
+}
+
+#copy-url:hover {
+  opacity: 0.8;
+}
+
+/* ===== 显示端 (电脑) ===== */
+#display {
+  flex-direction: column;
+  background: var(--bg);
+}
+
+#game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--primary);
+}
+
+.game-title {
+  font-size: 1.5em;
+  font-weight: 900;
+  background: linear-gradient(135deg, #00aaff, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-stats {
+  display: flex;
+  gap: 30px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.75em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+#game-canvas-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: var(--surface);
+  font-size: 0.9em;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffaa00;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== 控制器端 (手机) ===== */
+.controller-container {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.controller-header {
+  padding: 15px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controller-header h2 {
+  font-size: 1.2em;
+  color: var(--accent);
+}
+
+.conn-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.conn-status.ok {
+  background: rgba(0, 255, 136, 0.15);
+  color: #00ff88;
+}
+
+.conn-status.pending {
+  background: rgba(255, 170, 0, 0.15);
+  color: #ffaa00;
+}
+
+.conn-status.error {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff4444;
+}
+
+/* 连接表单 */
+.connect-form {
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.connect-form label {
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+#host-id {
+  background: var(--primary);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+#btn-connect {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+#btn-connect:hover {
+  opacity: 0.8;
+}
+
+/* 控制器 UI */
+.controller-ui {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.controller-ui.hidden {
+  display: none;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  color: var(--text);
+  padding: 12px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.mode-panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mode-panel.active {
+  display: flex;
+}
+
+.hint {
+  font-size: 0.8em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* D-Pad */
+.dpad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 8px;
+  width: 200px;
+  height: 200px;
+}
+
+.dpad.small {
+  width: 150px;
+  height: 150px;
+  gap: 5px;
+}
+
+.dpad-btn {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.dpad-btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(0.95);
+}
+
+.dpad-center {
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 1.5em;
+}
+
+.dpad .dpad-btn:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.dpad .dpad-btn:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.dpad .dpad-center {
+  grid-column: 2;
+  grid-row: 2;
+}
+.dpad .dpad-btn:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+.dpad .dpad-btn:nth-child(5) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* 陀螺仪 */
+.gyro-display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.gyro-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gyro-bar span {
+  font-size: 0.9em;
+  width: 20px;
+  color: var(--muted);
+}
+
+.gyro-fill {
+  height: 8px;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.1s;
+  min-width: 2px;
+}
+
+.calibrate-btn {
+  background: var(--primary);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.controller-footer {
+  padding: 10px;
+  background: var(--surface);
+  border-radius: 10px;
+  margin-top: auto;
+}
+
+.latency-display {
+  font-size: 0.85em;
+  color: var(--muted);
+  text-align: center;
+}
+
+#joystick {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--primary);
+  touch-action: none;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .role-selection {
+    flex-direction: column;
+  }
+  .logo h1 {
+    font-size: 2em;
+  }
+}

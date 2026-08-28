@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labyrinth 3D - 选择页面</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #00aaff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        a {
+            display: inline-block;
+            padding: 20px 40px;
+            background: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 15px;
+            color: #00aaff;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        a:hover {
+            border-color: #00aaff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,170,255,0.2);
+        }
+        .icon { font-size: 2em; display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🏰 Labyrinth 3D</h1>
+    <div class="links">
+        <a href="index.html">
+            <span class="icon">🖥️</span>
+            电脑显示端
+        </a>
+        <a href="controller.html">
+            <span class="icon">📱</span>
+            手机控制器
+        </a>
+    </div>
+</body>
+</html>
