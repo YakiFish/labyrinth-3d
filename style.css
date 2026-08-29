@@ -139,11 +139,13 @@ body {
 
 /* QR 提示 */
 .qr-hint {
-  margin-top: 40px;
-  padding: 20px;
+  margin: 15px auto 0;
+  padding: 15px 20px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   border: 1px solid var(--primary);
+  max-width: 500px;
+  text-align: center;
 }
 
 .qr-hint.hidden {

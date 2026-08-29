@@ -414,12 +414,22 @@ window.addEventListener('load', () => {
   const canvas = document.getElementById('gameCanvas');
   const network = new GameNetwork();
 
+  // 生成局域网可访问的 URL
+  const getLocalUrl = () => {
+    // 替换 localhost 为局域网 IP，方便手机访问
+    const origin = location.origin;
+    const lanIP = '192.168.0.23'; // 电脑局域网 IP
+    return origin.replace(/localhost|127\.0\.0\.1/g, lanIP);
+  };
+
   document.getElementById('btn-display').addEventListener('click', () => {
     network.initHost().then(({ url }) => {
+      // 生成手机可访问的 URL
+      const localUrl = getLocalUrl() + location.pathname + '?role=controller&host=' + url.split('host=')[1];
       document.getElementById('qr-hint').classList.remove('hidden');
-      document.getElementById('qr-url').value = url;
+      document.getElementById('qr-url').value = localUrl;
       document.getElementById('copy-url').addEventListener('click', () => {
-        navigator.clipboard?.writeText(url);
+        navigator.clipboard?.writeText(localUrl);
         document.getElementById('copy-url').textContent = '✅ 已复制';
         setTimeout(() => document.getElementById('copy-url').textContent = '📋 复制链接', 2000);
       });
