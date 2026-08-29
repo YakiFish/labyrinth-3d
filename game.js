@@ -423,6 +423,12 @@ window.addEventListener('load', () => {
   };
 
   document.getElementById('btn-display').addEventListener('click', () => {
+    // 必须在 initHost 之前设置回调，防止控制器先连接导致漏掉
+    network.onPeerConnect = () => {
+      document.getElementById('connection-status').querySelector('span').textContent = '✅ 控制器已连接';
+      document.getElementById('connection-status').querySelector('.status-dot').style.background = '#00ff88';
+      if (game) game.startGameLoop();
+    };
     network.initHost().then(({ url }) => {
       // 生成手机可访问的 URL
       const localUrl = getLocalUrl() + location.pathname + '?role=controller&host=' + url.split('host=')[1];
@@ -435,12 +441,6 @@ window.addEventListener('load', () => {
       });
       showScreen('display');
       game = new LabyrinthGame(canvas, network);
-
-      network.onPeerConnect = () => {
-        document.getElementById('connection-status').querySelector('span').textContent = '✅ 控制器已连接';
-        document.getElementById('connection-status').querySelector('.status-dot').style.background = '#00ff88';
-        game.startGameLoop();
-      };
     });
   });
 
